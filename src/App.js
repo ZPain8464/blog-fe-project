@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import qs from "qs";
+import axios from "axios";
 
 import Nav from "./components/Nav";
 import DisplayUsername from "./components/DisplayUsername";
@@ -31,8 +32,18 @@ const App = () => {
       const array = data.data;
       setArticles(array);
     }
+    const fetchAuthors = async () => {
+      const { data } = await axios.post('http://localhost:1337/api/auth/local', {
+      identifier: 'author@strapi.io',
+      password: 'strapi',
+      });
+
+      console.log(data);
+    }
     fetchCategories();
     fetchArticles();
+    fetchAuthors();
+    
   }, []);
   
   return (
