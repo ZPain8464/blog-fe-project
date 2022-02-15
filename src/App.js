@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import qs from "qs";
 import axios from "axios";
@@ -7,7 +7,9 @@ import axios from "axios";
 import Nav from "./components/Nav";
 import DisplayUsername from "./components/DisplayUsername";
 import ArticlesContainer from "./components/ArticlesContainer";
+import Articles from "./components/Articles"
 import Article from "./components/Article";
+import SignUp from "./components/SignUp";
 
 const App = () => {
 
@@ -47,15 +49,15 @@ const App = () => {
   }, []);
   
   return (
-    <div className="App">
-      <Nav props={categories} />
-      <DisplayUsername />
-        <Routes>
-          <Route path="/" element={<ArticlesContainer props={articles} />}/>
-          <Route path="/category/:id" element={<ArticlesContainer props={articles} />}/>
-          <Route path="/article/:id" element={<Article props={articles}/>}/>
-        </Routes>
-    </div>
+          <Routes>
+            <Route path="/" element={<Nav props={categories}/>}>
+              <Route path="/" element={<ArticlesContainer props={articles} />} >
+                <Route path="category/:id" element={<Articles  props={articles}/>} />
+              </Route>
+              <Route path="article/:id" element={<Article props={articles} />}/>
+              <Route path="signup" element={<SignUp />}/>
+            </Route>
+          </Routes>
   );
 }
 
