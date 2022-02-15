@@ -1,20 +1,18 @@
 import { useEffect, useState } from "react";
-import { Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import qs from "qs";
-import axios from "axios";
 
 import Nav from "./components/Nav";
-import DisplayUsername from "./components/DisplayUsername";
 import ArticlesContainer from "./components/ArticlesContainer";
 import Articles from "./components/Articles"
 import Article from "./components/Article";
-import SignUp from "./components/SignUp";
+import SignUp from "./components/Auth/SignUp";
 
 const App = () => {
 
   let [categories, setCategories] = useState([]);
-  let [articles, setArticles] = useState([])
+  let [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -34,19 +32,13 @@ const App = () => {
       const array = data.data;
       setArticles(array);
     }
-    const fetchAuthors = async () => {
-      const { data } = await axios.post('http://localhost:1337/api/auth/local', {
-      identifier: 'author@strapi.io',
-      password: 'strapi',
-      });
 
-      console.log(data);
-    }
     fetchCategories();
     fetchArticles();
-    fetchAuthors();
     
   }, []);
+
+
   
   return (
           <Routes>

@@ -1,11 +1,21 @@
 import React from "react";
 import { Outlet, Link } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 import DisplayUsername from "./DisplayUsername";
 
 const Nav = ({props}) => {
+    const cookies = new Cookies();
     const categories = props;
+    const authToken = cookies.get("token");
 
+    const logout = () => {
+        cookies.remove('token');
+        cookies.remove('email');
+        cookies.remove('username');
+        window.location.reload();
+    };
+    
     return (
         <>
         <div className="navbar_container">
@@ -16,9 +26,11 @@ const Nav = ({props}) => {
             </div>
             <div className="nav_links_container">
                 <ul className="categories_ul">
-                    <Link to="/signup">
-                            <li>Sign Up / Login</li>
-                    </Link>
+                    {!authToken ? (
+                        <Link to="/signup">
+                        <li>Sign Up / Login</li>
+                        </Link>
+                    ) : <li onClick={logout}><button>Logout</button></li>}
                     {categories.map((c, i) => (
                         <Link key={i} to={`/category/${c.attributes.category_name}`}>
                             <li key={i}>{c.attributes.category_name}</li>

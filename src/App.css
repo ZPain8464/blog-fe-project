@@ -127,3 +127,11 @@ input, label {
     text-align: left;
     padding-top: 10px;
   }
+
+  span {
+      color:#506376;
+  }
+
+  .hidden {
+      display: none;
+  }
