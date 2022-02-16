@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet, Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 
-import DisplayUsername from "./DisplayUsername";
+import SidebarContainer from "./Sidebar/SidebarContainer";
 
 const Nav = ({props}) => {
     const cookies = new Cookies();
@@ -39,7 +39,7 @@ const Nav = ({props}) => {
                 </ul>
             </div>
         </div>
-        <DisplayUsername />
+        <SidebarContainer />
         <Outlet />
         </>
     )
