@@ -5,11 +5,13 @@ import Articles from "../components/Articles";
 const ArticlesContainer = ({props}) => {
     return (
         <>
-        <section>
-            <h1>Catch the Latest:</h1>
-        </section>
         <div className="articles_container">
-            <Articles props={props}/>
+            <div className="articles_container_header">
+                <h1>Catch the Latest:</h1>
+            </div>
+            <div className="articles_list">
+                <Articles props={props}/>
+            </div>
         </div>
         </>
     )

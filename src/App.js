@@ -8,6 +8,8 @@ import ArticlesContainer from "./components/ArticlesContainer";
 import Articles from "./components/Articles"
 import Article from "./components/Article";
 import SignUp from "./components/Auth/SignUp";
+import SidebarContainer from "./components/Sidebar/SidebarContainer";
+import CreateArticles from "./components/CreateArticles/CreateArticles";
 
 const App = () => {
 
@@ -41,15 +43,20 @@ const App = () => {
 
   
   return (
-          <Routes>
-            <Route path="/" element={<Nav props={categories}/>}>
-              <Route path="/" element={<ArticlesContainer props={articles} />} >
-                <Route path="category/:id" element={<Articles  props={articles}/>} />
-              </Route>
-              <Route path="article/:id" element={<Article props={articles} />}/>
-              <Route path="signup" element={<SignUp />}/>
-            </Route>
-          </Routes>
+    <>
+      <Nav props={categories}/>
+        <div className="main">
+          <SidebarContainer />
+            <Routes>
+                <Route path="/" element={<ArticlesContainer props={articles} />} >
+                  <Route path="category/:id" element={<Articles  props={articles}/>} />
+                </Route>
+                <Route path="create" element={<CreateArticles />} />
+                <Route path="article/:id" element={<Article props={articles} />}/>
+                <Route path="signup" element={<SignUp />}/>
+            </Routes>
+        </div>
+    </>
   );
 }
 

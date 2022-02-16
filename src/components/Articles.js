@@ -10,26 +10,27 @@ const Articles = ({props}) => {
         });
     return (
         <>  
+            
             {params.id ? filterArticles.map((a,i) => (
+                <div className="article_card_container">
                 <Link key={i} to={`/article/${a.id}`}>
-                <div className="article">
                     <h2>{a.attributes.title}</h2>
                     <div className="article_card">
                         <img src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
                     </div>
-                </div>
                 </Link>
+                </div>
             ))
             :
             articles.map((a, i) => (
+                <div className="article_card_container">
                 <Link key={i} to={`/article/${a.id}`}>
-                    <div className="article">
                         <h2>{a.attributes.title}</h2>
                         <div className="article_card">
                             <img src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
                         </div>
-                    </div>
                 </Link>
+                </div>
             ))
             }
         </>

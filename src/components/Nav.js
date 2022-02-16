@@ -1,20 +1,11 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
-
-import SidebarContainer from "./Sidebar/SidebarContainer";
 
 const Nav = ({props}) => {
     const cookies = new Cookies();
     const categories = props;
     const authToken = cookies.get("token");
-
-    const logout = () => {
-        cookies.remove('token');
-        cookies.remove('email');
-        cookies.remove('username');
-        window.location.reload();
-    };
     
     return (
         <>
@@ -30,7 +21,7 @@ const Nav = ({props}) => {
                         <Link to="/signup">
                         <li>Sign Up / Login</li>
                         </Link>
-                    ) : <li onClick={logout}><button>Logout</button></li>}
+                    ) : ""}
                     {categories.map((c, i) => (
                         <Link key={i} to={`/category/${c.attributes.category_name}`}>
                             <li key={i}>{c.attributes.category_name}</li>
@@ -39,8 +30,6 @@ const Nav = ({props}) => {
                 </ul>
             </div>
         </div>
-        <SidebarContainer />
-        <Outlet />
         </>
     )
 }
