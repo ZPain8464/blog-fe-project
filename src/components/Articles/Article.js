@@ -20,7 +20,7 @@ const Article = ({props}) => {
                     <span>{b.attributes.createdAt}</span>
                 </div>
                 <div className="post_image_container">
-                    <img className="post_image" src={`http://localhost:1337${b.attributes.image.data.attributes.url}`} />
+                    <img alt="" className="post_image" src={`http://localhost:1337${b.attributes.image.data.attributes.url}`} />
                 </div>
                 <div className="post_content_container">
                     <p>{b.attributes.content}</p>

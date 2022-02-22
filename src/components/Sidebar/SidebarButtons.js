@@ -14,16 +14,6 @@ const SidebarButtons = () => {
 
     return(
         <div>
-            <button className="write_article_button">
-                <Link to="/create">
-                Write
-                </Link>
-            </button>
-            <button className="your_articles_button">
-                <Link to="/your-articles">
-                Your Articles
-                </Link>
-            </button>
             <button className="feeds_button">
                 <Link to="/">
                 Community Feed

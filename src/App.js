@@ -4,12 +4,11 @@ import "./App.css";
 import qs from "qs";
 
 import Nav from "./components/Nav";
-import ArticlesContainer from "./components/ArticlesContainer";
-import Articles from "./components/Articles"
-import Article from "./components/Article";
+import ArticlesContainer from "./components/Articles/ArticlesContainer";
+import Articles from "./components/Articles/Articles"
+import Article from "./components/Articles/Article";
 import SignUp from "./components/Auth/SignUp";
 import SidebarContainer from "./components/Sidebar/SidebarContainer";
-import CreateArticles from "./components/CreateArticles/CreateArticles";
 
 const App = () => {
 
@@ -51,7 +50,6 @@ const App = () => {
                 <Route path="/" element={<ArticlesContainer props={articles} />} >
                   <Route path="category/:id" element={<Articles  props={articles}/>} />
                 </Route>
-                <Route path="create" element={<CreateArticles />} />
                 <Route path="article/:id" element={<Article props={articles} />}/>
                 <Route path="signup" element={<SignUp />}/>
             </Routes>

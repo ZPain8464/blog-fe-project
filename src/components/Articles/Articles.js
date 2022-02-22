@@ -16,7 +16,7 @@ const Articles = ({props}) => {
                 <Link key={i} to={`/article/${a.id}`}>
                     <h2>{a.attributes.title}</h2>
                     <div className="article_card">
-                        <img src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
+                        <img alt='' src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
                     </div>
                 </Link>
                 </div>
@@ -27,7 +27,7 @@ const Articles = ({props}) => {
                 <Link key={i} to={`/article/${a.id}`}>
                         <h2>{a.attributes.title}</h2>
                         <div className="article_card">
-                            <img src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
+                            <img alt="" src={`http://localhost:1337${a.attributes.image.data.attributes.formats.small.url}`} />
                         </div>
                 </Link>
                 </div>
