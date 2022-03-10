@@ -19,8 +19,8 @@ const App = () => {
     const fetchCategories = async () => {
       const response = await fetch(`http://localhost:1337/api/categories?populate`);
       const data = await response.json();
-      const array = data.data;
-      setCategories(array);
+      const categoriesArr = data.data;
+      setCategories(categoriesArr);
     }
     const fetchArticles = async () => {
       const query = qs.stringify({
@@ -30,8 +30,8 @@ const App = () => {
       });
       const response = await fetch(`http://localhost:1337/api/articles?${query}`);
       const data = await response.json();
-      const array = data.data;
-      setArticles(array);
+      const articlesArr = data.data;
+      setArticles(articlesArr);
     }
 
     fetchCategories();
