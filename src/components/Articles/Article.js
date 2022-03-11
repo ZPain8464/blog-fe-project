@@ -1,46 +1,17 @@
-import { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
-import Cookies from 'universal-cookie';
-import qs from "qs";
 
-
+import { CommentsContainer } from "../Comments/CommentsContainer";
 
 const Article = ({props}) => {
 
-    const [comments, setComments] = useState([]);
-
-
-    useEffect(() => {
-        const fetchComments = async () => {
-            const query = qs.stringify({
-                populate: ['article'], 
-              }, {
-                encodeValuesOnly: true,
-              });
-            const response = await fetch(`http://localhost:1337/api/comments?${query}`, {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json',
-                },
-            });
-            const data = await response.json();
-            const commentsArr = data.data;
-            setComments(commentsArr);
-          };
-        
-          fetchComments();
-      }, []);
-
     const articles = props;
     const params = useParams();
+    // Filter article form articles prop
     const filterArticle = articles.filter(a => {
         return a.id.toString() === params.id
         });
     const blogPost = filterArticle;
-    const filterBlogComments = comments.filter(c => {
-        return c.attributes.article.data.id.toString() === params.id
-    });
-    const commentCount = filterBlogComments;
     
     return (
         <>
@@ -58,15 +29,7 @@ const Article = ({props}) => {
                     <p>{b.attributes.content}</p>
                 </div>
                 <hr/>
-                <div className="comments_container">
-                    {commentCount.length > 0
-                    ? 
-                    (
-                        <h3>Comments ({commentCount.length})</h3>
-                    )
-                    : ""
-                    }
-                </div>
+                <CommentsContainer />
             </div>
         )) 
         }   
