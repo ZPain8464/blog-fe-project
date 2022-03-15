@@ -1,7 +1,9 @@
-import React from "react";
+import React, { createContext } from "react";
 import { useParams } from "react-router-dom";
 
 import { CommentsContainer } from "../Comments/CommentsContainer";
+
+export const ArticleContext = React.createContext();
 
 const Article = ({props}) => {
 
@@ -15,6 +17,7 @@ const Article = ({props}) => {
     
     return (
         <>
+        <ArticleContext.Provider value={articles}>
         {params.id && blogPost.map((b, i) => (
             <div key={i} className="post">
             <h1>{b.attributes.title}</h1>
@@ -33,6 +36,7 @@ const Article = ({props}) => {
             </div>
         )) 
         }   
+        </ArticleContext.Provider>
         </>
     )
 }

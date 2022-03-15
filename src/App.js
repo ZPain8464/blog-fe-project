@@ -44,16 +44,16 @@ const App = () => {
   return (
     <>
       <Nav props={categories}/>
-        <div className="main">
-          <SidebarContainer />
-            <Routes>
-                <Route path="/" element={<ArticlesContainer props={articles} />} >
-                  <Route path="category/:id" element={<Articles  props={articles}/>} />
-                </Route>
-                <Route path="article/:id" element={<Article props={articles} />}/>
-                <Route path="signup" element={<SignUp />}/>
-            </Routes>
-        </div>
+      <div className="main">
+        <SidebarContainer />
+          <Routes>
+              <Route path="/" element={<ArticlesContainer props={articles} />} >
+                <Route path="category/:id" element={<Articles  props={articles}/>} />
+              </Route>
+              <Route path="article/:id" element={<Article props={articles} />}/>
+              <Route path="signup" element={<SignUp />}/>
+          </Routes>
+      </div>
     </>
   );
 }

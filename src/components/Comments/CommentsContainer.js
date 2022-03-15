@@ -24,6 +24,7 @@ export const CommentsContainer = () => {
                 },
             });
             const data = await response.json();
+            console.log(data);
             const commentsArr = data.data;
             setComments(commentsArr);
           };
