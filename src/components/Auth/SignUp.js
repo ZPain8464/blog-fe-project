@@ -57,11 +57,12 @@ const SignUp = () => {
         }).then((data) => {
             const cookies = new Cookies();
             const token = data.jwt;
-            const {email, username} = data.user;
-
+            const {email, username, id} = data.user;
+            
             cookies.set("token", token);
             cookies.set("email", email);
             cookies.set("username", username);
+            cookies.set("id", id);
             window.location.assign(`http://localhost:3000/`);
         })
         .catch((error) => {

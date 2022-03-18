@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { CommentsContainer } from "../Comments/CommentsContainer";
 
-export const ArticleContext = React.createContext();
+export const ArticleContext = createContext();
 
 const Article = ({props}) => {
 

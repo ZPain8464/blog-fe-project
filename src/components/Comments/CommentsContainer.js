@@ -24,7 +24,6 @@ export const CommentsContainer = () => {
                 },
             });
             const data = await response.json();
-            console.log(data);
             const commentsArr = data.data;
             setComments(commentsArr);
           };
@@ -58,7 +57,10 @@ export const CommentsContainer = () => {
                 </button>
             </div>
             <div className={showComponent ? `create_comment_container` : 'hidden'}>
-                <CreateComment comments={filterBlogComments}/>
+                <CreateComment 
+                    comments={comments}
+                    setComments={setComments}
+                    setShowComponent={setShowComponent}/>
             </div>
             {commentCount.length > 0 && 
             <CommentsList comments={filterBlogComments}/>

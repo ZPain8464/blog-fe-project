@@ -1,28 +1,26 @@
 import React, { useState, useContext } from "react";
 import Cookies from "universal-cookie";
+import qs from "qs";
+import { useParams } from "react-router-dom";
 
 import { ArticleContext } from "../Articles/Article";
 
-export const CreateComment = (comments) => {
+export const CreateComment = ({comments, setComments, setShowComponent}) => {
     
     const [commentText, setCommentText] = useState("");
+
+    const params = useParams();
     const articles = useContext(ArticleContext);
     const cookies = new Cookies();
     const username = cookies.get("username");
     const token = cookies.get("token");
-
-    // Need to get the article id and user is to make API POST call
+    const id = cookies.get("id");
 
     const postComment = async () => {
-        let articleId;
-        let userId;
-        if (comments.comments.length > 0) {
-            comments.comments.map(c => {
-                articleId = c.attributes.article.data.id;
-                userId = c.attributes.users_permissions_user.data.id;
-                return {articleId, userId}
-            });
-        }
+        const filterArticle = articles.filter(a => {
+            return a.id.toString() === params.id;
+        });
+        const articleId = filterArticle[0].id;
 
         const request = await fetch(`http://localhost:1337/api/comments`, {
             method: 'POST',
@@ -38,14 +36,26 @@ export const CreateComment = (comments) => {
                             id: articleId
                         },
                         users_permissions_user: {
-                            id: userId
+                            id: id
                         }
                     }
                 })
         });
         const response = await request.json();
-        const data = response;
-        console.log(data)
+        const newCommentId = response.data.id;
+        
+        // Fetch new comment by ID 
+        const query = qs.stringify({
+            populate: ['article', 'users_permissions_user'], 
+          }, {
+            encodeValuesOnly: true,
+          });
+        const newCommentDataRequest = await fetch(`http://localhost:1337/api/comments/${newCommentId}?${query}`);
+        const newComment = await newCommentDataRequest.json();
+        
+        setComments([...comments, newComment.data]);
+        setShowComponent((prevShowComponent) => !prevShowComponent);
+        setCommentText("");
     }
 
     return (
